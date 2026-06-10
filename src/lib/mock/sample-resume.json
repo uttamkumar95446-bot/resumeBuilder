@@ -1,0 +1,80 @@
+{
+  "contact": {
+    "name": "Rahul Sharma",
+    "email": "rahul.sharma@email.com",
+    "phone": "+91-98765-43210",
+    "location": "Bangalore, India",
+    "linkedin": "linkedin.com/in/rahulsharma",
+    "portfolio": "rahulsharma.dev"
+  },
+  "summary": "Full-stack developer with 4+ years of experience building scalable web applications. Proficient in React, Node.js, and cloud technologies. Passionate about creating intuitive user interfaces and robust backend systems.",
+  "skills": [
+    "JavaScript", "TypeScript", "React", "Next.js", "Node.js",
+    "Express", "PostgreSQL", "MongoDB", "REST APIs", "GraphQL",
+    "Docker", "Git", "CI/CD", "AWS", "Tailwind CSS"
+  ],
+  "experience": [
+    {
+      "company": "TechFlow Solutions",
+      "title": "Senior Frontend Engineer",
+      "startDate": "Jan 2023",
+      "endDate": "Present",
+      "bullets": [
+        "Developed and maintained React-based dashboard serving 10,000+ daily active users",
+        "Implemented state management using Redux Toolkit, reducing page load times by 40%",
+        "Led migration from class components to React Hooks across 50+ component files",
+        "Collaborated with design team to create a responsive component library using Storybook",
+        "Mentored 3 junior developers through code reviews and pair programming sessions"
+      ]
+    },
+    {
+      "company": "WebCraft Agency",
+      "title": "Full-Stack Developer",
+      "startDate": "Jul 2020",
+      "endDate": "Dec 2022",
+      "bullets": [
+        "Built RESTful APIs using Node.js and Express, serving 50,000+ requests per day",
+        "Designed and implemented PostgreSQL database schemas for multi-tenant SaaS platform",
+        "Integrated third-party payment gateways (Stripe, Razorpay) processing $2M+ in transactions",
+        "Developed automated CI/CD pipelines using GitHub Actions and Docker",
+        "Reduced API response times by 60% through query optimization and caching strategies"
+      ]
+    },
+    {
+      "company": "StartUp Labs",
+      "title": "Junior Developer",
+      "startDate": "Jan 2019",
+      "endDate": "Jun 2020",
+      "bullets": [
+        "Contributed to React Native mobile app with 50K+ downloads on Play Store",
+        "Wrote unit and integration tests using Jest, achieving 85% code coverage",
+        "Participated in agile sprints and daily stand-ups as part of a 8-person engineering team"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Open Source Analytics Dashboard",
+      "description": "An open-source real-time analytics dashboard built with React and D3.js",
+      "technologies": ["React", "D3.js", "WebSocket", "Node.js"]
+    },
+    {
+      "name": "E-Commerce Platform",
+      "description": "Full-stack e-commerce platform with cart, checkout, and inventory management",
+      "technologies": ["Next.js", "Stripe", "PostgreSQL", "Docker"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Indian Institute of Technology",
+      "degree": "B.Tech",
+      "field": "Computer Science",
+      "startDate": "2015",
+      "endDate": "2019"
+    }
+  ],
+  "certifications": [
+    "AWS Certified Developer – Associate",
+    "Meta Front-End Developer Professional Certificate"
+  ]
+}

@@ -1,0 +1,47 @@
+Senior Frontend Engineer - Developer Experience Team
+
+About TechCorp Inc.
+TechCorp is a leading SaaS platform that helps businesses streamline their operations through intelligent automation. We serve over 10,000 customers worldwide and are growing rapidly. Our engineering team is distributed across the US and Europe, and we value collaboration, innovation, and ownership.
+
+The Role
+We are looking for a Senior Frontend Engineer to join our Developer Experience team. In this role, you will build and maintain the core UI platform that powers our SaaS product. You will work closely with product designers, backend engineers, and our design systems team to deliver a world-class user experience.
+
+Responsibilities
+- Design, build, and maintain high-quality React/TypeScript components and features for our SaaS platform
+- Architect efficient, reusable front-end systems that drive complex web applications
+- Collaborate with UX designers to implement pixel-perfect, accessible, and responsive user interfaces
+- Optimize application performance through code splitting, lazy loading, and performance monitoring
+- Participate in code reviews and mentor junior developers on frontend best practices
+- Contribute to our internal component library and design system
+- Work with backend engineers to define and consume RESTful and GraphQL APIs
+- Write comprehensive unit and integration tests using Jest and React Testing Library
+- Participate in agile ceremonies including daily standups, sprint planning, and retrospectives
+
+Required Qualifications
+- 3+ years of professional frontend development experience
+- Strong proficiency in React, TypeScript, and modern JavaScript (ES6+)
+- Experience with state management libraries (Redux, Zustand, or similar)
+- Solid understanding of CSS, responsive design, and cross-browser compatibility
+- Experience with testing frameworks (Jest, React Testing Library, Cypress)
+- Familiarity with version control (Git) and CI/CD pipelines
+- Excellent communication and collaboration skills
+- Bachelor's degree in Computer Science or equivalent practical experience
+
+Preferred Qualifications
+- Experience with Next.js and server-side rendering
+- Knowledge of GraphQL and Apollo Client
+- Experience building or maintaining a design system / component library
+- Familiarity with Node.js backend development
+- Experience with performance monitoring tools (Lighthouse, Web Vitals)
+- Contributions to open source projects or a strong GitHub presence
+
+What We Offer
+- Competitive salary and equity package
+- Remote-friendly work environment
+- Health, dental, and vision insurance
+- 401(k) matching
+- Annual learning and development budget ($5,000)
+- Home office setup stipend
+- Flexible PTO policy
+
+TechCorp is an equal opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees.

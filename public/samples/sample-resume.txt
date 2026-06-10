@@ -1,0 +1,64 @@
+Alex Chen
+alex.chen@email.com | (555) 123-4567 | linkedin.com/in/alexchen | github.com/alexchen
+San Francisco, CA
+
+PROFESSIONAL SUMMARY
+Full-stack developer with 4 years of experience building scalable web applications using React, TypeScript, Node.js, and PostgreSQL. Passionate about creating clean, maintainable code and delivering intuitive user experiences. Proven track record of improving application performance and leading feature development in agile environments.
+
+SKILLS
+Languages: TypeScript, JavaScript, Python, HTML5, CSS3
+Frontend: React, Next.js, Redux, Tailwind CSS, Material UI, HTML5, CSS3
+Backend: Node.js, Express, Python (FastAPI), REST APIs, GraphQL
+Database: PostgreSQL, MongoDB, Redis
+DevOps/Tools: Docker, AWS (EC2, S3), Git, GitHub Actions, CI/CD
+Testing: Jest, React Testing Library, Cypress
+Other: Agile/Scrum, Code Review, Technical Documentation
+
+EXPERIENCE
+
+Senior Frontend Developer | TechCorp Inc. | San Francisco, CA
+Jan 2023 - Present
+
+- Led migration of legacy jQuery application to React/TypeScript, reducing page load time by 40% and improving developer productivity
+- Architected and implemented a component library used by 3 product teams, serving 50,000+ daily active users
+- Reduced bundle size by 35% through code splitting, lazy loading, and tree shaking optimization
+- Mentored 2 junior developers through code reviews, pair programming, and weekly knowledge-sharing sessions
+- Collaborated with design team to implement responsive, accessible UI components following WCAG 2.1 AA standards
+- Implemented comprehensive end-to-end testing suite using Cypress, achieving 90% critical path coverage
+
+Full Stack Developer | StartupXYZ | Remote
+Jun 2021 - Dec 2022
+
+- Built and maintained RESTful APIs using Node.js and Express, handling 1M+ monthly API requests
+- Designed PostgreSQL database schema for multi-tenant SaaS platform, optimizing query performance with proper indexing
+- Developed real-time dashboard using React and WebSockets for monitoring application performance metrics
+- Implemented JWT-based authentication and role-based access control system
+- Automated CI/CD pipeline using GitHub Actions, reducing deployment time from 30 minutes to 5 minutes
+- Wrote unit and integration tests achieving 85% code coverage
+
+Junior Developer | WebAgency Co. | San Francisco, CA
+Aug 2020 - May 2021
+
+- Developed responsive landing pages and marketing websites using React and Tailwind CSS
+- Built custom WordPress themes and plugins for client projects
+- Assisted in migrating client websites from WordPress to headless CMS architecture
+- Participated in daily standups and sprint planning in an agile team of 8 developers
+
+EDUCATION
+
+Bachelor of Science in Computer Science
+University of California, Berkeley | 2016 - 2020
+GPA: 3.6/4.0
+Relevant Coursework: Data Structures, Algorithms, Database Systems, Web Development, Software Engineering
+
+PROJECTS
+
+E-Commerce Platform | React, Node.js, PostgreSQL, Stripe
+- Built full-stack e-commerce application with product management, shopping cart, and payment processing
+- Implemented Stripe integration for secure payment processing
+- Deployed on AWS using Docker containers and EC2 instances
+
+Task Management App | Next.js, TypeScript, Prisma, PostgreSQL
+- Developed collaborative task management application with real-time updates
+- Implemented drag-and-drop interface using dnd-kit library
+- Added team collaboration features including comments, assignments, and notifications

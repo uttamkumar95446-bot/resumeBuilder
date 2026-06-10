@@ -1,0 +1,43 @@
+{
+  "jobTitle": "Senior Frontend Engineer",
+  "company": "InnovateTech",
+  "requiredSkills": [
+    "React", "TypeScript", "Next.js", "GraphQL",
+    "CSS-in-JS", "Testing (Jest, React Testing Library)",
+    "Version Control (Git)", "Agile Development"
+  ],
+  "preferredSkills": [
+    "Storybook", "CI/CD", "Monorepo Experience",
+    "Performance Optimization", "Accessibility (a11y)"
+  ],
+  "responsibilities": [
+    "Build and maintain scalable frontend applications using React and Next.js",
+    "Collaborate with UX designers to implement pixel-perfect, responsive interfaces",
+    "Optimize application performance for maximum speed and scalability",
+    "Participate in code reviews and mentor junior developers",
+    "Contribute to our component library and design system",
+    "Work closely with backend engineers to integrate GraphQL APIs"
+  ],
+  "qualifications": [
+    "5+ years of experience in frontend development",
+    "Strong proficiency in React, TypeScript, and modern JavaScript",
+    "Experience with GraphQL APIs and state management",
+    "Understanding of web accessibility standards (WCAG)",
+    "Excellent problem-solving and communication skills"
+  ],
+  "tools": [
+    "Figma", "VS Code", "Webpack/Vite", "Chrome DevTools",
+    "Jest", "React Testing Library", "Storybook"
+  ],
+  "keywords": [
+    "React", "TypeScript", "Next.js", "GraphQL", "Frontend",
+    "UI/UX", "Component Library", "Design System", "Performance",
+    "Accessibility", "CI/CD", "Testing", "Agile"
+  ],
+  "seniorityLevel": "senior",
+  "domainSignals": ["SaaS", "B2B Software", "Enterprise Applications"],
+  "softSkills": [
+    "Mentoring", "Code Review", "Cross-team Collaboration",
+    "Technical Communication", "Problem Solving"
+  ]
+}
