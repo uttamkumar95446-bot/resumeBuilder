@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import ProgressSteps from "@/components/ProgressSteps";
 import { Separator } from "@/components/ui/separator";
+import { generateClientPdf, type ClientPdfInput } from "@/lib/pdf/client-pdf";
 import type { ResumeProfile, JobDescriptionProfile, MatchScore, TailoredResume, GapAnalysis } from "@/types";
 
 export default function ExportPage() {
@@ -44,32 +45,15 @@ export default function ExportPage() {
   const handleDownload = useCallback(async (type: "tailored" | "comparison") => {
     if (!data) return;
     const setLoading = type === "tailored" ? setLoadingTailored : setLoadingComparison;
-    setLoading(true);
     setError(null);
+    setLoading(true);
 
     try {
-      const res = await fetch("/api/export-pdf", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, type }),
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || "Export failed");
-      }
-
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = type === "tailored" ? "tailored-resume.pdf" : "resume-comparison.pdf";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      const input: ClientPdfInput = { ...data, type };
+      await generateClientPdf(input);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Export failed. Please try again.");
+      const message = err instanceof Error ? err.message : "PDF generation failed.";
+      setError(message);
     } finally {
       setLoading(false);
     }

@@ -20,20 +20,22 @@
 
 | Requirement | Details |
 |---|---|
-| **Vercel Account** | Pro plan ($20/mo) required for functions >10s |
+| **Vercel Account** | Hobby (free) or Pro ($20/mo) |
 | **GitHub Repository** | Code pushed to GitHub |
 | **Groq API Key** | Free tier at https://console.groq.com |
 | **Node.js** | 20+ locally for testing |
 
-### Why Vercel Pro?
+### Plan Comparison
 
-| Route | Time Needed | Hobby Limit | Pro Limit |
-|---|---|---|---|
-| `/api/analyze` | ~20-30s (LLM calls) | 10s | 60s+ |
-| `/api/tailor` | ~20-30s (LLM calls) | 10s | 60s+ |
-| `/api/export-pdf` | ~10-15s (Chromium boot) | 10s | 30s |
+| Feature | Hobby (Free) | Pro ($20/mo) |
+|---|---|---|
+| Function timeout | **10s hard cap** | Up to 900s (configurable) |
+| LLM model | Use `llama-3.1-8b-instant` | Use `llama-3.3-70b-versatile` |
+| PDF generation | Client-side (browser) | Client-side (browser) |
+| vercel.json maxDuration | Ignored (capped 10s) | Respected |
 
-> If routes exceed 60s, switch Groq model to `llama-3.1-8b-instant` (3x faster).
+> **Hobby Plan:** Set `GROQ_MODEL=llama-3.1-8b-instant` in Vercel env vars. Complete analysis/tailoring well under 10s.
+> **Pro Plan:** Default model (`llama-3.3-70b-versatile`) works within the 60s limit in `vercel.json`.
 
 ---
 
@@ -56,9 +58,7 @@ Add to both Preview and Production environments.
 ### next.config.ts
 
 ```ts
-const nextConfig: NextConfig = {
-  serverExternalPackages: ['playwright-core'],
-};
+const nextConfig: NextConfig = {};
 ```
 
 ### vercel.json
@@ -68,7 +68,6 @@ const nextConfig: NextConfig = {
   "functions": {
     "src/app/api/analyze/route.ts": { "maxDuration": 60 },
     "src/app/api/tailor/route.ts": { "maxDuration": 60 },
-    "src/app/api/export-pdf/route.ts": { "maxDuration": 30 },
     "src/app/api/parse-resume/route.ts": { "maxDuration": 30 },
     "src/app/api/parse-jd/route.ts": { "maxDuration": 30 }
   }
@@ -83,20 +82,24 @@ Vercel auto-detects Next.js. Default build settings work.
 
 ## 4. PDF Generation on Vercel
 
-### The Challenge
+### Approach: Client-Side (Browser)
 
-Standard `playwright` bundles Chromium (~400MB) which exceeds Vercel's 250MB function limit.
+PDF generation happens **entirely in the user's browser** using `html2canvas` + `jsPDF`. No server-side Chromium or PDF processing needed.
 
-### The Solution
+**Flow:**
+1. User clicks "Download" on the export page
+2. Browser renders the resume HTML (from existing templates) in a hidden container
+3. `html2canvas` captures the rendered content as canvas images
+4. `jsPDF` creates a multi-page A4 PDF from the canvas slices
+5. Browser triggers the file download
 
-- **`playwright-core`** -- API layer without bundled browser (~2MB)
-- **`@sparticuz/chromium`** -- Serverless-optimized Chromium binary (~120MB)
+**Benefits:**
+- No server function timeout issues (works on Hobby plan)
+- Zero server-side processing cost
+- Uses the user's own browser resources
+- Instant response — no network request to wait for
 
-The PDF generator (`src/lib/pdf/pdf-generator.ts`) auto-detects Vercel env and uses the correct Chromium path. On local dev, it falls back to default system lookup or `PLAYWRIGHT_CHROMIUM_PATH` env var.
-
-### PDF Caching
-
-In-memory cache with 24h TTL, max 100 entries. Repeated identical requests skip Chromium launch.
+**Source:** `src/lib/pdf/client-pdf.ts` (uses existing `generateTailoredResumeHtml` / `generateComparisonHtml` templates)
 
 ---
 
