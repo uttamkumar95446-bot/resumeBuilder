@@ -21,12 +21,12 @@ export function generateComparisonHtml(
 <style>
   @page { margin: 0.5in; size: A4; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Calibri', 'Segoe UI', Arial, Helvetica, sans-serif; font-size: 9.5pt; color: #1a1a1a; line-height: 1.4; }
+  body { font-family: 'Calibri', 'Segoe UI', Arial, Helvetica, sans-serif; font-size: 9.5pt; color: #1a1a1a; line-height: 1.25; }
   .header { text-align: center; margin-bottom: 10pt; padding-bottom: 8pt; border-bottom: 2px solid #333; }
   .header h1 { font-size: 14pt; font-weight: 700; }
   .header p { font-size: 9pt; color: #555; margin-top: 3pt; }
-  .section-title { font-size: 10pt; font-weight: 700; border-bottom: 1px solid #999; padding-bottom: 2pt; margin-top: 10pt; margin-bottom: 5pt; text-transform: uppercase; letter-spacing: 0.3px; }
-  .scores-grid { display: flex; gap: 12pt; margin-bottom: 6pt; }
+  .section-title { font-size: 11pt; font-weight: 700; border-bottom: 1px solid #999; padding-bottom: 2pt; margin-top: 10pt; margin-bottom: 5pt; text-transform: uppercase; letter-spacing: 0.3px; }
+  .scores-grid { display: flex; gap: 10pt; margin-bottom: 6pt; }
   .score-card { flex: 1; border: 1px solid #ddd; border-radius: 4pt; padding: 6pt 8pt; }
   .score-card h3 { font-size: 9pt; font-weight: 700; margin-bottom: 3pt; }
   .score-value { font-size: 18pt; font-weight: 700; }
@@ -43,9 +43,10 @@ export function generateComparisonHtml(
   .diff-item { margin-bottom: 4pt; padding: 3pt 0; border-bottom: 1px dotted #eee; font-size: 8.5pt; }
   .diff-company { font-weight: 700; font-size: 9pt; }
   .diff-title { font-size: 8.5pt; color: #444; }
-  .diff-bullet { font-size: 8pt; line-height: 1.4; margin: 1pt 0; }
+  .diff-bullet { font-size: 8pt; line-height: 1.25; margin: 1pt 0; }
   .diff-change { font-size: 7.5pt; color: #555; font-style: italic; }
   .jd-section { font-size: 9pt; margin-bottom: 4pt; }
+  .jd-section ul { font-size: 9pt; line-height: 1.25; margin: 2pt 0 0 14pt; }
   .disclaimer { margin-top: 12pt; padding: 6pt 8pt; background: #fef2f2; border: 1px solid #fecaca; border-radius: 3pt; font-size: 7.5pt; color: #991b1b; line-height: 1.5; }
   .page-break { page-break-before: always; }
 </style>

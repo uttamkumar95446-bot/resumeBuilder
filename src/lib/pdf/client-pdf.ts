@@ -44,8 +44,6 @@ export async function generateClientPdf(input: ClientPdfInput): Promise<void> {
   try {
     const iframeDoc = iframe.contentDocument!;
     iframeDoc.open();
-    // The template functions already return a complete <!DOCTYPE html> document,
-    // so we can write it directly into the iframe.
     iframeDoc.write(html);
     iframeDoc.close();
 
@@ -57,8 +55,8 @@ export async function generateClientPdf(input: ClientPdfInput): Promise<void> {
 
     const body = iframeDoc.body;
 
-    // Set body to match A4 dimensions exactly. 15mm padding gives margins equivalent
-    // to what the PDF renderer used, keeping content in a 180mm-wide area.
+    // Set body to match A4 dimensions exactly.
+    // Padding creates consistent margins (15mm ≈ 0.6in on all sides).
     body.style.margin = "0";
     body.style.padding = "15mm";
     body.style.width = "210mm";
@@ -67,7 +65,7 @@ export async function generateClientPdf(input: ClientPdfInput): Promise<void> {
     body.style.background = "#ffffff";
 
     const canvas = await html2canvas(body, {
-      scale: 2,
+      scale: 3,
       useCORS: true,
       logging: false,
       backgroundColor: "#ffffff",
@@ -81,9 +79,11 @@ export async function generateClientPdf(input: ClientPdfInput): Promise<void> {
     const pdfWidth = 210;
     const pdfHeight = 297;
 
-    // pxPerMm: since body is exactly 210mm wide (same as A4), the ratio is direct.
-    // Fallback 210mm = 794px at 96dpi in case scrollWidth is 0 (shouldn't happen).
-    const pxPerMm = canvas.width / (body.scrollWidth || 794);
+    // CRITICAL: pxPerMm must use pdfWidth (not body.scrollWidth) so that
+    // the horizontal and vertical pixel densities match exactly.
+    // This prevents the text from appearing stretched or condensed.
+    // canvas.width at scale 3 spans pdfWidth mm → correct density both ways.
+    const pxPerMm = canvas.width / pdfWidth;
     const totalHeightMm = canvas.height / pxPerMm;
     const pageCount = Math.max(1, Math.ceil(totalHeightMm / pdfHeight));
 
@@ -105,10 +105,9 @@ export async function generateClientPdf(input: ClientPdfInput): Promise<void> {
         );
       }
 
-      const pageImgData = pageCanvas.toDataURL("image/jpeg", 0.95);
-      // Place at (0,0) filling the full A4 page — the 15mm padding in the body
-      // already provides the margins, so no extra padding needed.
-      pdf.addImage(pageImgData, "JPEG", 0, 0, pdfWidth, (sliceHeight / pxPerMm));
+      // Use PNG (lossless) instead of JPEG — text looks sharp with no compression artifacts
+      const pageImgData = pageCanvas.toDataURL("image/png");
+      pdf.addImage(pageImgData, "PNG", 0, 0, pdfWidth, (sliceHeight / pxPerMm));
     }
 
     const filename =

@@ -8,26 +8,26 @@ export function generateTailoredResumeHtml(resume: TailoredResume): string {
 <style>
   @page { margin: 0.6in 0.75in; size: A4; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Calibri', 'Segoe UI', Arial, Helvetica, sans-serif; font-size: 11pt; color: #1a1a1a; line-height: 1.45; }
-  h1 { font-size: 16pt; font-weight: 700; text-align: center; margin-bottom: 2pt; color: #1a1a1a; }
-  .contact { text-align: center; font-size: 10pt; color: #444; margin-bottom: 10pt; }
-  .section-title { font-size: 12pt; font-weight: 700; border-bottom: 1.5px solid #333; padding-bottom: 2pt; margin-top: 12pt; margin-bottom: 6pt; text-transform: uppercase; letter-spacing: 0.5px; color: #1a1a1a; }
-  .summary-text { font-size: 10.5pt; line-height: 1.5; margin-bottom: 4pt; }
-  .exp-entry { margin-bottom: 8pt; page-break-inside: avoid; }
+  body { font-family: 'Calibri', 'Segoe UI', Arial, Helvetica, sans-serif; font-size: 10pt; color: #1a1a1a; line-height: 1.25; }
+  h1 { font-size: 20pt; font-weight: 700; text-align: center; margin-bottom: 4pt; color: #1a1a1a; letter-spacing: 0.3px; }
+  .contact { text-align: center; font-size: 9.5pt; color: #444; margin-bottom: 10pt; }
+  .section-title { font-size: 11pt; font-weight: 700; border-bottom: 1.5px solid #333; padding-bottom: 2pt; margin-top: 12pt; margin-bottom: 5pt; text-transform: uppercase; letter-spacing: 0.5px; color: #1a1a1a; }
+  .summary-text { font-size: 10pt; line-height: 1.3; margin-bottom: 4pt; }
+  .exp-entry { margin-bottom: 7pt; page-break-inside: avoid; }
   .exp-header { display: flex; justify-content: space-between; align-items: baseline; }
-  .exp-company { font-weight: 700; font-size: 11pt; }
-  .exp-title { font-style: italic; font-size: 10.5pt; color: #333; }
-  .exp-date { font-size: 10pt; color: #555; white-space: nowrap; }
-  .exp-bullets { margin-top: 2pt; padding-left: 16pt; }
-  .exp-bullets li { margin-bottom: 1.5pt; font-size: 10.5pt; line-height: 1.45; }
-  .skills-list { display: flex; flex-wrap: wrap; gap: 3pt 8pt; list-style: none; padding: 0; }
-  .skills-list li { font-size: 10.5pt; }
+  .exp-company { font-weight: 700; font-size: 10.5pt; }
+  .exp-title { font-style: italic; font-size: 10pt; color: #333; }
+  .exp-date { font-size: 9.5pt; color: #555; white-space: nowrap; }
+  .exp-bullets { margin-top: 2pt; padding-left: 14pt; }
+  .exp-bullets li { margin-bottom: 2.5pt; font-size: 10pt; line-height: 1.25; }
+  .skills-list { display: flex; flex-wrap: wrap; gap: 2pt 6pt; list-style: none; padding: 0; }
+  .skills-list li { font-size: 10pt; }
   .skills-list li::before { content: "\u2022 "; }
-  .project-entry { margin-bottom: 6pt; page-break-inside: avoid; }
-  .project-name { font-weight: 700; font-size: 10.5pt; }
-  .project-desc { font-size: 10pt; color: #333; margin-top: 1pt; }
-  .project-tech { font-size: 9.5pt; color: #555; margin-top: 1pt; }
-  .education-entry { margin-bottom: 4pt; font-size: 10.5pt; }
+  .project-entry { margin-bottom: 5pt; page-break-inside: avoid; }
+  .project-name { font-weight: 700; font-size: 10pt; }
+  .project-desc { font-size: 9.5pt; color: #333; margin-top: 1pt; }
+  .project-tech { font-size: 9pt; color: #555; margin-top: 1pt; }
+  .education-entry { margin-bottom: 4pt; font-size: 10pt; }
   .section-title { page-break-after: avoid; }
   .page-break { page-break-before: always; }
   .disclaimer { margin-top: 12pt; padding: 6pt 8pt; background: #fef2f2; border: 1px solid #fecaca; border-radius: 3pt; font-size: 7.5pt; color: #991b1b; line-height: 1.5; }
