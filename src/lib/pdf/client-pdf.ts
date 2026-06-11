@@ -27,29 +27,48 @@ export async function generateClientPdf(input: ClientPdfInput): Promise<void> {
           input.gaps,
         );
 
-  const container = document.createElement("div");
-  container.innerHTML = html;
-  container.style.position = "absolute";
-  container.style.left = "-9999px";
-  container.style.top = "0";
-  container.style.width = "210mm";
-  container.style.zIndex = "-1";
-  container.style.background = "#ffffff";
-  document.body.appendChild(container);
+  // Use a hidden iframe to isolate the template HTML from the page's CSS.
+  // This prevents html2canvas from encountering modern CSS color functions
+  // (lab(), oklch(), etc.) used by Tailwind v4 / shadcn / base-ui that it
+  // cannot parse.
+  const iframe = document.createElement("iframe");
+  iframe.style.position = "absolute";
+  iframe.style.left = "-9999px";
+  iframe.style.top = "0";
+  iframe.style.width = "210mm";
+  iframe.style.height = "0";
+  iframe.style.border = "none";
+  iframe.style.zIndex = "-1";
+  document.body.appendChild(iframe);
 
   try {
-    await document.fonts.ready;
-    await new Promise((resolve) => setTimeout(resolve, 300));
+    const iframeDoc = iframe.contentDocument!;
+    iframeDoc.open();
+    // The template functions already return a complete <!DOCTYPE html> document,
+    // so we can write it directly into the iframe.
+    iframeDoc.write(html);
+    iframeDoc.close();
 
-    const canvas = await html2canvas(container, {
+    // Wait for iframe to fully load, then fonts, before capturing
+    if (iframeDoc.readyState !== "complete") {
+      await new Promise((resolve) => { iframe.onload = resolve; });
+    }
+    await iframeDoc.fonts.ready;
+
+    const body = iframeDoc.body;
+    body.style.margin = "0";
+    body.style.padding = "0";
+    body.style.background = "#ffffff";
+
+    const canvas = await html2canvas(body, {
       scale: 2,
       useCORS: true,
       logging: false,
       backgroundColor: "#ffffff",
-      width: container.scrollWidth,
-      height: container.scrollHeight,
-      windowWidth: container.scrollWidth,
-      windowHeight: container.scrollHeight,
+      width: body.scrollWidth,
+      height: body.scrollHeight,
+      windowWidth: body.scrollWidth,
+      windowHeight: body.scrollHeight,
     });
 
     const pdf = new jsPDF("p", "mm", "a4");
@@ -59,7 +78,7 @@ export async function generateClientPdf(input: ClientPdfInput): Promise<void> {
     const contentWidth = pdfWidth - margin * 2;
     const contentHeight = pdfHeight - margin * 2;
 
-    const pxPerMm = canvas.width / (container.scrollWidth || 210);
+    const pxPerMm = canvas.width / (body.scrollWidth || 794); // 794px ≈ 210mm at 96dpi fallback
     const totalHeightMm = canvas.height / pxPerMm;
     const pageCount = Math.max(1, Math.ceil(totalHeightMm / contentHeight));
 
@@ -89,6 +108,6 @@ export async function generateClientPdf(input: ClientPdfInput): Promise<void> {
       input.type === "tailored" ? "tailored-resume.pdf" : "resume-comparison.pdf";
     pdf.save(filename);
   } finally {
-    document.body.removeChild(container);
+    document.body.removeChild(iframe);
   }
 }
