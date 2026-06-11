@@ -56,8 +56,14 @@ export async function generateClientPdf(input: ClientPdfInput): Promise<void> {
     await iframeDoc.fonts.ready;
 
     const body = iframeDoc.body;
+
+    // Set body to match A4 dimensions exactly. 15mm padding gives margins equivalent
+    // to what the PDF renderer used, keeping content in a 180mm-wide area.
     body.style.margin = "0";
-    body.style.padding = "0";
+    body.style.padding = "15mm";
+    body.style.width = "210mm";
+    body.style.minHeight = "297mm";
+    body.style.boxSizing = "border-box";
     body.style.background = "#ffffff";
 
     const canvas = await html2canvas(body, {
@@ -74,19 +80,18 @@ export async function generateClientPdf(input: ClientPdfInput): Promise<void> {
     const pdf = new jsPDF("p", "mm", "a4");
     const pdfWidth = 210;
     const pdfHeight = 297;
-    const margin = 15;
-    const contentWidth = pdfWidth - margin * 2;
-    const contentHeight = pdfHeight - margin * 2;
 
-    const pxPerMm = canvas.width / (body.scrollWidth || 794); // 794px ≈ 210mm at 96dpi fallback
+    // pxPerMm: since body is exactly 210mm wide (same as A4), the ratio is direct.
+    // Fallback 210mm = 794px at 96dpi in case scrollWidth is 0 (shouldn't happen).
+    const pxPerMm = canvas.width / (body.scrollWidth || 794);
     const totalHeightMm = canvas.height / pxPerMm;
-    const pageCount = Math.max(1, Math.ceil(totalHeightMm / contentHeight));
+    const pageCount = Math.max(1, Math.ceil(totalHeightMm / pdfHeight));
 
     for (let page = 0; page < pageCount; page++) {
       if (page > 0) pdf.addPage();
 
-      const sourceY = page * contentHeight * pxPerMm;
-      const sliceHeight = Math.min(canvas.height - sourceY, contentHeight * pxPerMm);
+      const sourceY = page * pdfHeight * pxPerMm;
+      const sliceHeight = Math.min(canvas.height - sourceY, pdfHeight * pxPerMm);
 
       const pageCanvas = document.createElement("canvas");
       pageCanvas.width = canvas.width;
@@ -101,7 +106,9 @@ export async function generateClientPdf(input: ClientPdfInput): Promise<void> {
       }
 
       const pageImgData = pageCanvas.toDataURL("image/jpeg", 0.95);
-      pdf.addImage(pageImgData, "JPEG", margin, margin, contentWidth, (sliceHeight / pxPerMm));
+      // Place at (0,0) filling the full A4 page — the 15mm padding in the body
+      // already provides the margins, so no extra padding needed.
+      pdf.addImage(pageImgData, "JPEG", 0, 0, pdfWidth, (sliceHeight / pxPerMm));
     }
 
     const filename =
